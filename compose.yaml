@@ -1,0 +1,20 @@
+services:
+  server:
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - soketi
+
+  soketi:
+    image: quay.io/soketi/soketi:1.4-16-debian
+    ports:
+      - 6001:6001
+      - 9601:9601
+    environment:
+      - SOKETI_APP_MANAGER_DRIVER=array
+      - SOKETI_DEFAULT_APP_ID=1
+      - SOKETI_DEFAULT_APP_SECRET=secret
+      - SOKETI_DEFAULT_APP_KEY=key
+      - SOKETI_DEBUG=1
